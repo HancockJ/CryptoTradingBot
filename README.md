@@ -4,7 +4,7 @@ We are planning on developing a trading bot for use on the Kraken crypto exchang
 Built by Jack Hancock and Jon Crosse.
 
 TODO List:
-- [X] Both of us setup Kraken accounts
+- [ ] Both of us setup Kraken accounts
 - [ ] Get Kraken API working so that we can view public info
 - [ ] Kraken API - view private info
 - [ ] Kraken API - Buy and sell on account
