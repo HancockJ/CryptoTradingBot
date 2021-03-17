@@ -3,7 +3,7 @@ import urllib.parse
 import requests
 from requests.auth import AuthBase
 import time
-import ConfigTemplate
+import Config
 
 
 class BearerTokenAuth(AuthBase):
@@ -40,7 +40,7 @@ def get_recent_tweets(config, all_tweets):
     }
     query = urllib.parse.quote(f"from:{config.twitter_username} {config.tweet_keyword}")
     url = f"https://api.twitter.com/2/tweets/search/recent?max_results=10&query={query}"
-    config.twitter_key_info["bearer_token"] = BearerTokenAuth(config.twitter_username, config.tweet_keyword)
+    config.twitter_key_info["bearer_token"] = BearerTokenAuth(config.twitter_key_info["public"], config.twitter_key_info["private"])
     response = requests.get(url, auth=config.twitter_key_info["bearer_token"], headers=headers)
     if response.status_code != 200:
         raise Exception(f"Request returned an error: %s%s" %
@@ -60,5 +60,5 @@ def get_recent_tweets(config, all_tweets):
 
 tweet_history = []
 while True:
-    new_tweets, tweet_history = get_recent_tweets(ConfigTemplate, tweet_history)
+    new_tweets, tweet_history = get_recent_tweets(Config, tweet_history)
     time.sleep(1)
