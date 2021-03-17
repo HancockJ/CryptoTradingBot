@@ -6,8 +6,8 @@ import hashlib
 from urllib.parse import urlencode
 
 
-KEY = '40fa68dbd24d0c35eda02ee744561868b3150ca5bb2a4069a742971970396399'
-SECRET = '47e203b17b42142881cbca137cf9c6f297aa937ebf228216486d804772b50a81'
+KEY = 'public key'
+SECRET = 'secret key'
 #BASE_URL = 'https://api.binance.us' # production base url
 #BASE_URL = 'https://testnet.binance.vision' # testnet base url
 BASE_URL = 'https://testnet.binancefuture.com' # testnet base url
@@ -57,51 +57,60 @@ def send_public_request(url_path, payload={}):
     response = dispatch_request('GET')(url=url)
     return response.json()
 
-''' ======  end of functions ====== '''
+#View the account information for given public and private key
+def view_account():
+ response = send_signed_request('GET', '/api/v3/account')
+ print(response)
 
-### public data endpoint, call send_public_request #####
-# get klines
-#response = send_public_request('/api/v3/klines' , {"symbol": "BTCUSDT", "interval": "1d"})
-#print(response)
-
-
-### USER_DATA endpoints, call send_signed_request #####
-# get account informtion
-# if you can see the account details, then the API key/secret is correct
-# response = send_signed_request('GET', '/api/v3/account')
-# print(response)
-
-
-# # place a limit sell order
-# if you see order response, then the parameters setting is correct
-# params = {
-#    "symbol": "ETHUSDT",
-#   "side": "SELL",
-#    "type": "LIMIT",
-#    "quantity": "5",
-#    "price": "1775.05",
-#    "timeInforce": "GTC"
-# }
-# response = send_signed_request('POST', '/fapi/v1/order', params)
-# print(response)
-
+#Create a buy order for a given symbol and quantity
+def buy_order(symbol_name, quantity):
 # # place an order
 # if you see order response, then the parameters setting is correct
-# params = {
-#     "symbol": "ETHUSDT",
-#    "side": "BUY",
-#     "type": "MARKET",
-#     "quantity": "5",
-# }
-# response = send_signed_request('POST', '/fapi/v1/order', params)
-# print(response)
+ params = {
+     "symbol": symbol_name,
+     "side": "BUY",
+     "type": "MARKET",
+     "quantity": quantity
+ }
+ response = send_signed_request('POST', '/fapi/v1/order', params)
+ print(response)
 
-#cancel an order
-params = {
-   "symbol": "ETHUSDT",
-   "orderid": "734356778"
-}
-response = send_signed_request('DELETE', '/fapi/v1/order', params)
-print(response)
+#Create a sell limit oder for a given symbol and price
+def sell_limit_order(symbol_name, order_type, quantity, price):
+# place an order
+# if you see order response, then the parameters setting is correct
+ params = {
+    "symbol": symbol_name,
+    "side": "SELL",
+    "type": order_type,
+    "quantity": quantity,
+    "price": price,
+    "timeInforce": "GTC"
+ }
+ response = send_signed_request('POST', '/fapi/v1/order', params)
+ print(response)
 
+#Create a sell order at market price, for a given symbol and quantity
+def sell_order(symbol_name, quantity):
+ params = {
+    "symbol": symbol_name,
+    "side": "SELL",
+    "type": "MARKET",
+    "quantity": quantity
+ }
+ response = send_signed_request('POST', '/fapi/v1/order', params)
+ print(response)
+
+#Cancel a given buy or sell order
+def cancel_oder(symbol_name, order_id):
+ params = {
+    "symbol": symbol_name,
+    "orderid": order_id
+ }
+ response = send_signed_request('DELETE', '/fapi/v1/order', params)
+ print(response)
+
+''' ======  end of functions ====== '''
+
+sell_order("ETHUSDT", "5")
 
