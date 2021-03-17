@@ -1,3 +1,4 @@
+# Twitter Details
 twitter_key_info = {
     "public": 'Enter public key',
     "private": 'Enter private key',
@@ -6,3 +7,5 @@ twitter_key_info = {
 
 twitter_username = "elonmusk"
 tweet_keyword = "Doge"
+
+# Binance Details
