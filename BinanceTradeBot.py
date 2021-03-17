@@ -72,7 +72,7 @@ def send_public_request(url_path, payload={}):
 # print(response)
 
 
-# # place an order
+# # place a limit sell order
 # if you see order response, then the parameters setting is correct
 # params = {
 #    "symbol": "ETHUSDT",
@@ -96,6 +96,7 @@ def send_public_request(url_path, payload={}):
 # response = send_signed_request('POST', '/fapi/v1/order', params)
 # print(response)
 
+#cancel an order
 params = {
    "symbol": "ETHUSDT",
    "orderid": "734356778"
