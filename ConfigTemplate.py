@@ -8,4 +8,10 @@ twitter_key_info = {
 twitter_username = "elonmusk"
 tweet_keyword = "Doge"
 
-# Binance Details
+# Binance API Config
+
+binance_key_info = {
+    "public": 'public key',
+    "private": 'private key',
+}
+BINANCE_URL = 'https://testnet.binancefuture.com'  # testnet base url

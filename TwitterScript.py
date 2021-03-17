@@ -52,13 +52,13 @@ def get_recent_tweets(config, all_tweets):
     if parsed["meta"]["result_count"] > 0:
         for tweet in parsed["data"]:
             if tweet["id"] not in all_tweets:
-                print(tweet["text"])
+                # print(tweet["text"])
                 tweets.append(tweet["text"])
                 all_tweets.append(tweet["id"])
     return tweets, all_tweets
-
-
-tweet_history = []
-while True:
-    new_tweets, tweet_history = get_recent_tweets(Config, tweet_history)
-    time.sleep(1)
+#
+#
+# tweet_history = []
+# while True:
+#     new_tweets, tweet_history = get_recent_tweets(Config, tweet_history)
+#     time.sleep(1)
