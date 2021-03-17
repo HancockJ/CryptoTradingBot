@@ -6,8 +6,8 @@ import hashlib
 from urllib.parse import urlencode
 
 
-KEY = '40fa68dbd24d0c35eda02ee744561868b3150ca5bb2a4069a742971970396399'
-SECRET = '47e203b17b42142881cbca137cf9c6f297aa937ebf228216486d804772b50a81'
+KEY = 'public key'
+SECRET = 'secret key'
 #BASE_URL = 'https://api.binance.us' # production base url
 #BASE_URL = 'https://testnet.binance.vision' # testnet base url
 BASE_URL = 'https://testnet.binancefuture.com' # testnet base url
