@@ -33,9 +33,15 @@ class BearerTokenAuth(AuthBase):
         return r
 
 
-def get_recent_tweets(key, api_url, api_headers):
+def get_recent_tweets(config, all_tweets):
     print("Getting new tweets...")
-    response = requests.get(api_url, auth=key["bearer_token"], headers=api_headers)
+    headers = {
+        "Accept-Encoding": "gzip"
+    }
+    query = urllib.parse.quote(f"from:{config.twitter_username} {config.tweet_keyword}")
+    url = f"https://api.twitter.com/2/tweets/search/recent?max_results=10&query={query}"
+    config.twitter_key_info["bearer_token"] = BearerTokenAuth(config.twitter_username, config.tweet_keyword)
+    response = requests.get(url, auth=config.twitter_key_info["bearer_token"], headers=headers)
     if response.status_code != 200:
         raise Exception(f"Request returned an error: %s%s" %
                         (response.status_code, response.text))
@@ -45,23 +51,14 @@ def get_recent_tweets(key, api_url, api_headers):
     tweets = []
     if parsed["meta"]["result_count"] > 0:
         for tweet in parsed["data"]:
-            if tweet["id"] not in old_tweets:
+            if tweet["id"] not in all_tweets:
                 print(tweet["text"])
                 tweets.append(tweet["text"])
-                old_tweets.append(tweet["id"])
-    return tweets
+                all_tweets.append(tweet["id"])
+    return tweets, all_tweets
 
 
-query = urllib.parse.quote(f"from:{ConfigTemplate.twitter_username} {ConfigTemplate.tweet_keyword}")
-
-url = f"https://api.twitter.com/2/tweets/search/recent?max_results=10&query={query}"
-
-headers = {
-    "Accept-Encoding": "gzip"
-}
-
-old_tweets = []
+tweet_history = []
 while True:
-    ConfigTemplate.twitter_key_info["bearer_token"] = BearerTokenAuth(ConfigTemplate.twitter_username, ConfigTemplate.tweet_keyword)
-    new_tweets = get_recent_tweets(ConfigTemplate.twitter_key_info, url, headers)
+    new_tweets, tweet_history = get_recent_tweets(ConfigTemplate, tweet_history)
     time.sleep(1)
