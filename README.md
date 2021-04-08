@@ -12,6 +12,7 @@ TODO List:
 - [X] Use code to allow users to buy/sell through application
 - [X] Set up connection to Twitter API
 - [X] Notify when Elon Musk tweets word "doge"
+- [ ] Confirm project works with all upper/lower case "doge"/"DOGE" etc.
 - [ ] Link bot to buy / sell doge tokens when Elon tweets
 - [ ] Finish up everything and make code clean
 - [ ] Add in extras like special limit sells etc.

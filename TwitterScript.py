@@ -34,7 +34,7 @@ class BearerTokenAuth(AuthBase):
 
 
 def get_recent_tweets(config, all_tweets):
-    print("Getting new tweets...")
+    print("[Getting new tweets...]")
     headers = {
         "Accept-Encoding": "gzip"
     }
