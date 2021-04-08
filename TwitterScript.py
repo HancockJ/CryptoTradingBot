@@ -46,8 +46,6 @@ def get_recent_tweets(config, all_tweets):
         raise Exception(f"Request returned an error: %s%s" %
                         (response.status_code, response.text))
     parsed = json.loads(response.text)
-    #  Used for debugging
-    #  pretty_print = json.dumps(parsed, indent=2, sort_keys=True)
     tweets = []
     if parsed["meta"]["result_count"] > 0:
         for tweet in parsed["data"]:
@@ -56,9 +54,3 @@ def get_recent_tweets(config, all_tweets):
                 tweets.append(tweet["text"])
                 all_tweets.append(tweet["id"])
     return tweets, all_tweets
-#
-#
-# tweet_history = []
-# while True:
-#     new_tweets, tweet_history = get_recent_tweets(Config, tweet_history)
-#     time.sleep(1)

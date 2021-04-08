@@ -2,18 +2,19 @@ import time
 import BinanceScript
 import Config
 import TwitterScript
+import BinanceScript as binance
 
 
 def create_transaction():
     # Get doge value @ start of transaction
-    start_price = 10
-    # Buy Doge
-    # Wait X time
-    time.sleep(5)
-    # Sell Doge
-    #BinanceScript.sell_order("ETHUSDT", "5")
-    # Get doge price @ end of transaction
-    end_price = 11
+    start_price = binance.getPrice("Doge")
+    # TODO: Buy Doge
+
+    time.sleep(5)  # TODO: Change to a function that calculates when we want to sell
+
+    end_price = binance.getPrice("Doge")
+    # TODO: Sell Doge
+
     # Output money made
     print(f"==> You bought Doge @ ${start_price} and sold doge @ ${end_price}. Your total profit was"
           f" {end_price - start_price}.")

@@ -116,3 +116,12 @@ def cancel_oder(symbol_name, order_id):
     response = send_signed_request('DELETE', '/fapi/v1/order', params)
     print(response)
 
+def getPrice(symbol_name):
+    params = {
+        "symbol": symbol_name,
+    }
+    response = send_signed_request('GET', '/fapi/v1/ticker/price', params)
+    print(response)
+
+getPrice("DOGEUSDT")
+

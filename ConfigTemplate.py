@@ -11,7 +11,7 @@ tweet_keyword = "Doge"
 # Binance API Config
 
 binance_key_info = {
-    "public": 'public key',
-    "private": 'private key',
+    "public": 'Key',
+    "private": 'Key',
 }
 BINANCE_URL = 'https://testnet.binancefuture.com'  # testnet base url
