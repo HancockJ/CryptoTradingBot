@@ -31,10 +31,6 @@ while True:
     print(new_tweets)
     if len(new_tweets) > 0:
         #  Start a binance transaction
-<<<<<<< HEAD
         make_transaction(Config.asset)
-=======
-        make_transaction("ETHUSDT")
->>>>>>> 0a8183df6018a7cd5f9d040f461ad9065e2bbcda
         new_tweets = 0
     time.sleep(2)
