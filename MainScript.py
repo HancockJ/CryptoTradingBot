@@ -5,14 +5,14 @@ import TwitterScript
 import BinanceScript as binance
 
 
-def create_transaction():
-    # Get doge value @ start of transaction
-    start_price = binance.getPrice("Doge")
+def make_transaction(asset):
+    # Get input assets value @ start of transaction
+    start_price = binance.getPrice(asset)
     # TODO: Buy Doge
 
     time.sleep(5)  # TODO: Change to a function that calculates when we want to sell
 
-    end_price = binance.getPrice("Doge")
+    end_price = binance.getPrice(asset)
     # TODO: Sell Doge
 
     # Output money made
@@ -26,5 +26,6 @@ while True:
     print(new_tweets)
     if len(new_tweets) > 0:
         #  Start a binance transaction
-        create_transaction()
+        make_transaction()
+        new_tweets = 0
     time.sleep(2)
