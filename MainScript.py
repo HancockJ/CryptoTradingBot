@@ -2,20 +2,23 @@ import time
 import BinanceScript
 import Config
 import TwitterScript
+import math
 import BinanceScript as binance
 
 
 def make_transaction(asset):
     # Get input assets value @ start of transaction
+    account_value = binance.view_account()
     start_price = binance.getPrice(asset)
     # TODO: Buy Doge
-    buy = binance.buy_order("ETHUSDT", "2")
+    units = math.floor(float(account_value)/float(start_price))
+    buy = binance.buy_order(asset, units)
 
     time.sleep(20)  # TODO: Change to a function that calculates when we want to sell
 
     end_price = binance.getPrice(asset)
     # TODO: Sell Doge
-    sell = binance.sell_order("ETHUSDT", "2")
+    sell = binance.sell_order(asset, units)
 
     # Output money made
     print(f"==> You bought Doge @ ${start_price} and sold doge @ ${end_price}. Your total profit was"

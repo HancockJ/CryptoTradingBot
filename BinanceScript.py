@@ -4,6 +4,7 @@ import requests
 import hashlib
 import Config
 import json
+import math
 
 from urllib.parse import urlencode
 
@@ -62,8 +63,11 @@ def send_public_request(url_path, payload={}):
 
 # View the account information for given public and private key
 def view_account():
-    response = send_signed_request('GET', '/api/v3/account')
-    print(response)
+    response = send_signed_request('GET', '/fapi/v1/account')
+    jdump = json.dumps(response)
+    jload = json.loads(jdump)
+    print(jload["totalWalletBalance"])
+    return(jload["totalWalletBalance"])
 
 
 # Create a buy order for a given symbol and quantity
@@ -125,4 +129,8 @@ def getPrice(symbol_name):
     jdump = json.dumps(response)
     jload = json.loads(jdump)
     return(jload["price"])
+
+total = view_account()
+pri = getPrice("ETHUSDT")
+print(math.floor(float(total)/float(pri)))
 
