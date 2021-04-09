@@ -7,6 +7,7 @@ twitter_key_info = {
 
 twitter_username = "elonmusk"
 tweet_keyword = "Doge"
+asset = "ETHUSDT"
 
 # Binance API Config
 

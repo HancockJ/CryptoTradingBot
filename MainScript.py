@@ -8,16 +8,16 @@ import BinanceScript as binance
 
 def make_transaction(asset):
     # Get input assets value @ start of transaction
-    account_value = binance.view_account()
+    balance = binance.get_account_balance()
+    print("Buying " + asset + " With full account balance of: " + balance)
     start_price = binance.getPrice(asset)
     # TODO: Buy Doge
-    units = math.floor(float(account_value)/float(start_price))
+    units = math.floor(float(balance)/float(start_price))
     buy = binance.buy_order(asset, units)
 
     time.sleep(20)  # TODO: Change to a function that calculates when we want to sell
 
     end_price = binance.getPrice(asset)
-    # TODO: Sell Doge
     sell = binance.sell_order(asset, units)
 
     # Output money made
@@ -31,6 +31,6 @@ while True:
     print(new_tweets)
     if len(new_tweets) > 0:
         #  Start a binance transaction
-        make_transaction()
+        make_transaction(Config.asset)
         new_tweets = 0
     time.sleep(2)

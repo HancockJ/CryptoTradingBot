@@ -43,7 +43,6 @@ def send_signed_request(http_method, url_path, payload={}):
         query_string = 'timestamp={}'.format(get_timestamp())
 
     url = BASE_URL + url_path + '?' + query_string + '&signature=' + hashing(query_string)
-    print("{} {}".format(http_method, url))
     params = {'url': url, 'params': {}}
     response = dispatch_request(http_method)(**params)
     return response.json()
@@ -55,17 +54,15 @@ def send_public_request(url_path, payload={}):
     url = BASE_URL + url_path
     if query_string:
         url = url + '?' + query_string
-    print("{}".format(url))
     response = dispatch_request('GET')(url=url)
     return response.json()
 
 
 # View the account information for given public and private key
-def view_account():
+def get_account_balance():
     response = send_signed_request('GET', '/fapi/v1/account')
     jdump = json.dumps(response)
     jload = json.loads(jdump)
-    print(jload["totalWalletBalance"])
     return(jload["totalWalletBalance"])
 
 
@@ -128,4 +125,3 @@ def getPrice(symbol_name):
     jdump = json.dumps(response)
     jload = json.loads(jdump)
     return(jload["price"])
-
