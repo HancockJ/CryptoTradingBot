@@ -31,6 +31,6 @@ while True:
     print(new_tweets)
     if len(new_tweets) > 0:
         #  Start a binance transaction
-        make_transaction()
+        make_transaction("ETHUSDT")
         new_tweets = 0
     time.sleep(2)

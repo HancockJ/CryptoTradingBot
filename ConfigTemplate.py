@@ -5,7 +5,7 @@ twitter_key_info = {
     "bearer_token": ""  # Leave Blank
 }
 
-twitter_username = "elonmusk"
+twitter_username = "doublediamondm2"
 tweet_keyword = "Doge"
 
 # Binance API Config
