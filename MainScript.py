@@ -7,17 +7,19 @@ import BinanceScript as binance
 
 def create_transaction():
     # Get doge value @ start of transaction
-    start_price = binance.getPrice("Doge")
+    start_price = binance.getPrice("ETHUSDT")
     # TODO: Buy Doge
+    buy = binance.buy_order("ETHUSDT", "2")
 
-    time.sleep(5)  # TODO: Change to a function that calculates when we want to sell
+    time.sleep(20)  # TODO: Change to a function that calculates when we want to sell
 
-    end_price = binance.getPrice("Doge")
+    end_price = binance.getPrice("ETHUSDT")
     # TODO: Sell Doge
+    sell = binance.sell_order("ETHUSDT", "2")
 
     # Output money made
     print(f"==> You bought Doge @ ${start_price} and sold doge @ ${end_price}. Your total profit was"
-          f" {end_price - start_price}.")
+          f" {float(end_price) - float(start_price)}.")
 
 
 tweet_history = []

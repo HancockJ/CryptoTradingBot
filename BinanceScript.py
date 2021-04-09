@@ -3,6 +3,7 @@ import time
 import requests
 import hashlib
 import Config
+import json
 
 from urllib.parse import urlencode
 
@@ -76,7 +77,7 @@ def buy_order(symbol_name, quantity):
         "quantity": quantity
     }
     response = send_signed_request('POST', '/fapi/v1/order', params)
-    print(response)
+    return(response)
 
 
 # Create a sell limit oder for a given symbol and price
@@ -92,7 +93,7 @@ def sell_limit_order(symbol_name, order_type, quantity, price):
         "timeInforce": "GTC"
     }
     response = send_signed_request('POST', '/fapi/v1/order', params)
-    print(response)
+    return(response)
 
 
 # Create a sell order at market price, for a given symbol and quantity
@@ -104,7 +105,7 @@ def sell_order(symbol_name, quantity):
         "quantity": quantity
     }
     response = send_signed_request('POST', '/fapi/v1/order', params)
-    print(response)
+    return(response)
 
 
 # Cancel a given buy or sell order
@@ -114,14 +115,14 @@ def cancel_oder(symbol_name, order_id):
         "orderid": order_id
     }
     response = send_signed_request('DELETE', '/fapi/v1/order', params)
-    print(response)
+    return(response)
 
 def getPrice(symbol_name):
     params = {
         "symbol": symbol_name,
     }
     response = send_signed_request('GET', '/fapi/v1/ticker/price', params)
-    print(response)
-
-getPrice("DOGEUSDT")
+    jdump = json.dumps(response)
+    jload = json.loads(jdump)
+    return(jload["price"])
 
