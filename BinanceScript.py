@@ -4,7 +4,6 @@ import requests
 import hashlib
 import Config
 import json
-import math
 
 from urllib.parse import urlencode
 
@@ -129,8 +128,4 @@ def getPrice(symbol_name):
     jdump = json.dumps(response)
     jload = json.loads(jdump)
     return(jload["price"])
-
-total = view_account()
-pri = getPrice("ETHUSDT")
-print(math.floor(float(total)/float(pri)))
 
